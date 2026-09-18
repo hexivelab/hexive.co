@@ -1,13 +1,17 @@
-# Hexive · Astro
+# Hexive
 
-A faithful recreation of the Hexive homepage archived on 28 April 2025, built with Astro and locally hosted source assets.
+Hexive Startup Lab's website, built with Astro and TypeScript. The site introduces the team’s approach, working principles, client testimonial, and partner companies.
 
 ## Development
 
+Use Node.js 22.12 or newer.
+
 ```sh
-npm install
+npm ci
 npm run dev
 ```
+
+## Validation and production
 
 ```sh
 npm run check
@@ -15,31 +19,32 @@ npm run build
 npm run preview
 ```
 
-Node.js 22.12 or newer is required. The production build is static HTML in `dist/`.
+The production build is a static site in `dist/`.
 
-## Structure
+## Deployment
+
+GitHub Pages hosts the site at https://hexive.co. The workflow in `.github/workflows/deploy.yml` checks, builds, and deploys pushes to `main`. It can also be started manually from the repository's Actions tab.
+
+The workflow uses Node.js 24 and the committed npm lockfile. GitHub Pages must use **GitHub Actions** as its deployment source, with **hexive.co** as the custom domain and **Enforce HTTPS** enabled.
+
+`astro.config.mjs` sets the production URL, and `public/CNAME` includes the domain in the build. No repository `base` prefix is needed because the site is served at the domain root.
+
+Deployment configuration follows the [Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
+
+## Project structure
 
 - `src/pages/index.astro` assembles the homepage.
-- `src/components/` contains the eight page sections.
-- `src/styles/source.css` preserves the original responsive design and self-hosted font declarations.
-- `src/styles/site.css` adds accessible navigation, focus states, and reduced motion support.
-- `src/site.ts` configures the contact destination.
-- `public/assets/` contains recovered original images, SVGs, and font files.
+- `src/components/` contains the navigation, hero, introduction, principles, testimonial, partners, and footer.
+- `src/layouts/Layout.astro` defines the document layout and metadata.
+- `src/styles/global.css` contains typography, layout utilities, colors, and responsive styles.
+- `src/styles/site.css` contains navigation behavior styles, keyboard focus indicators, and reduced motion support.
+- `src/site.ts` defines the contact URL.
+- `public/assets/` contains locally hosted images, logos, and fonts.
 
-No React, jQuery, Webflow JavaScript, remote font service, or archive scripts are required at runtime. The mobile menu supports keyboard navigation, Escape, closing after navigation, and resizing back to desktop.
+## Navigation and contact
 
-## Source and recovery
+“What we do” links to the homepage introduction. All “Let’s talk” links open an email to `hey@hexive.co`. Update `src/site.ts` to change the address.
 
-Reference: https://web.archive.org/web/20250428023459/https://hexive.webflow.io/
+The mobile menu supports keyboard navigation, Escape to close, and automatic closing after selecting a link or switching to desktop width.
 
-The archive's stylesheet requests failed, but the exact stylesheet referenced by its HTML remained available from Webflow's CDN. The reference was restored using that stylesheet and its original assets before desktop and mobile inspection. The archive toolbar and Webflow hosting badge are excluded from the recreation.
-
-The source includes the hero, introduction, six working principles, testimonial, 27 company logos, call to action, four insight cards, and footer. Original copy and responsive image variants are retained.
-
-## Unavailable destinations
-
-The Contact, What we do, and Insights destination pages returned 404 from the archive; the original live homepage also returned 404. What we do and Insights navigation now target their corresponding homepage sections. Article links retain the original external URLs; their full articles are not reconstructed.
-
-All “Let’s talk” links open `mailto:hey@hexive.co`, configured in `src/site.ts`. No environment variables are required. This site does not submit forms or send messages.
-
-Only publish the original fonts, imagery, and branding if you have the necessary rights.
+No environment variables or backend services are required.

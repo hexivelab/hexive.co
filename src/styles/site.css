@@ -1,4 +1,4 @@
-/* Preserve the archived design while replacing its Webflow runtime. */
+/* Navigation, accessibility, and responsive behavior. */
 html { scroll-behavior: smooth; }
 .heading-style-h1, .layout48_text-wrapper > .margin-bottom > .display-1 {
   font-family: 'Recifedisplay Book', sans-serif;
