@@ -1,0 +1,26 @@
+/* Preserve the archived design while replacing its Webflow runtime. */
+html { scroll-behavior: smooth; }
+.heading-style-h1, .layout48_text-wrapper > .margin-bottom > .display-1 {
+  font-family: 'Recifedisplay Book', sans-serif;
+  font-weight: 400;
+}
+.skip-link { position: absolute; top: -100px; left: 20px; z-index: 1000; padding: 12px 20px; background: var(--black); color: var(--white-smoke); }
+.skip-link:focus { top: 12px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--sandy-brown); outline-offset: 5px; }
+.navbar1_menu-button { border: 0; background: transparent; padding: 0; color: inherit; }
+.navbar1_menu-button:focus-visible { outline: 2px solid var(--sandy-brown); }
+@media (max-width: 991px) {
+  .navbar1_menu-button { display: block; z-index: 102; }
+  .navbar1_menu { display: none; }
+  .navbar1_menu[data-open] .navbar_link { display: block; }
+  .navbar1_menu[data-open] { display: block; position: absolute; top: 100%; left: 0; right: 0; z-index: 101; border: 0; }
+  .menu-icon1_line-top, .menu-icon1_line-bottom, .menu-icon1_line-middle { transition: transform .2s ease, opacity .2s ease; }
+  [aria-expanded='true'] .menu-icon1_line-top { transform: translateY(8px) rotate(45deg); }
+  [aria-expanded='true'] .menu-icon1_line-bottom { transform: translateY(-8px) rotate(-45deg); }
+  [aria-expanded='true'] .menu-icon1_line-middle { opacity: 0; }
+  body.menu-open { overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; }
+}

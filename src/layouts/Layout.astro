@@ -1,0 +1,24 @@
+---
+import '../styles/source.css';
+import '../styles/site.css';
+const title = 'Hexive — We elevate startups with a bold vision.';
+const description = 'We empower startups to craft transformative user experiences, no matter where they are in their journey.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/64d66226808d8b0622eb73ab_Open-graph.png" />
+    <link rel="icon" href="/assets/64d66251808d8b0622eba78c_favicon.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <slot />
+  </body>
+</html>

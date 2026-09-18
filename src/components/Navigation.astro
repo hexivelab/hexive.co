@@ -1,0 +1,59 @@
+---
+import { contactUrl } from "../site";
+---
+<header class="navbar_component w-nav" role="banner">
+<div class="navbar_container">
+<a aria-current="page" aria-label="Hexive home" class="brand-link w-nav-brand w--current" href="/">
+<img alt="Hexive Startup Lab" class="navbar_logo" loading="lazy" src="/assets/64d66216d0774393027e911f_brand-logo.svg"/>
+</a>
+<nav aria-label="Main navigation" class="navbar1_menu is-page-height-tablet w-nav-menu" id="primary-navigation" role="navigation">
+<a class="navbar_link w-nav-link" href="#how-we-work">What we do</a>
+<a class="navbar_link w-nav-link" href={contactUrl}>Let’s talk</a>
+</nav>
+<button aria-controls="primary-navigation" aria-expanded="false" aria-label="Open menu" class="navbar1_menu-button w-nav-button" type="button">
+<div aria-hidden="true" class="menu-icon1">
+<div class="menu-icon1_line-top">
+</div>
+<div class="menu-icon1_line-middle">
+<div class="menu-icon_line-middle-inner">
+</div>
+</div>
+<div class="menu-icon1_line-bottom">
+</div>
+</div>
+</button>
+</div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.navbar1_menu-button');
+  const menu = document.querySelector<HTMLElement>('#primary-navigation');
+  const mobile = window.matchMedia('(max-width: 991px)');
+
+  function setOpen(open: boolean, restoreFocus = false) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.toggleAttribute('data-open', open);
+    document.body.classList.toggle('menu-open', open);
+    if (restoreFocus) toggle.focus();
+  }
+
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', event => {
+    if (toggle?.getAttribute('aria-expanded') !== 'true') return;
+    if (event.key === 'Escape') setOpen(false, true);
+    if (event.key === 'Tab') {
+      const links = menu?.querySelectorAll<HTMLAnchorElement>('a');
+      if (!links?.length) return;
+      // DOM order is links, then the toggle. Keep keyboard focus inside the open navigation.
+      if (event.shiftKey && document.activeElement === links[0]) {
+        event.preventDefault(); toggle.focus();
+      } else if (!event.shiftKey && document.activeElement === toggle) {
+        event.preventDefault(); links[0].focus();
+      }
+    }
+  });
+  mobile.addEventListener('change', () => setOpen(false));
+</script>

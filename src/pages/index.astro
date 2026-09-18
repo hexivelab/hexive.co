@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Introduction from '../components/Introduction.astro';
+import Principles from '../components/Principles.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Partners from '../components/Partners.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout>
+  <div class="page-wrapper">
+    <Navigation />
+    <main id="main-content" class="main-wrapper">
+      <Hero />
+      <Introduction />
+      <Principles />
+      <Testimonial />
+      <Partners />
+    </main>
+    <Footer />
+  </div>
+</Layout>
